@@ -2,14 +2,14 @@ const express = require("express");
 const serverless = require("serverless-http");
 const bodyParser = require("body-parser");
 const Bot = require("messenger-bot");
-// const logger = require("./middlewares/logger");
+const logger = require("./middlewares/logger");
 
 // INIT APP
 const app = express();
 const router = express.Router();
 
 // Init middleware
-// app.use(logger);
+app.use(logger);
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -25,15 +25,15 @@ let bot = new Bot({
   app_secret: "APP_SECRET"
 });
 
-router.get("/status", (req, res) => {
+app.get("/", (req, res) => {
   return res.json({ server: "server is running" });
 });
 
-app.get("/", (req, res) => {
+app.get("/messenger", (req, res) => {
   return bot._verify(req, res);
 });
 
-app.post("/", (req, res) => {
+app.post("/messenger", (req, res) => {
   bot._handleMessage(req.body);
   res.end(JSON.stringify({ status: "ok" }));
 });
