@@ -20,7 +20,7 @@ app.use(
 //  configuring BOT
 let bot = new Bot({
   token:
-    "EAAOqXvH9M2UBAGNj3VIJsL5XowsA2Ja83ak9IUweWTvZCGWQZBaOHgOUCNxbPNnjivOMALKSZCzKLqFhsWqHEmVCnRAkvvB5egCfPcyZClRuVu8ckLxqyCBRemElzquRAfUFxWvOlX3Khcc6A1Mmwa57nUZBhTbOGPLDPRzSL6gZDZD",
+    "EAAOqXvH9M2UBAFUkZAPpk5F1Fnzclg0WNXf3zsZBb27p3Nm6xzqGei2RodrW4B6cpczMzRCPTScq07Ks0LBw8ryUupD5CMRbj1DwIJmztpio51RRCdkIl5kFDj2Pkm3Nzbg3OXIPFmOUqWtpNm5esVkuknhEgMaZCGGlSiY4AZDZD",
   verify: "MY_TOKEN",
   app_secret: "APP_SECRET"
 });
