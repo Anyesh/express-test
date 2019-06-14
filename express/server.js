@@ -39,11 +39,11 @@ app.use(
     extended: true
   })
 );
-router.get("/", (req, res) => {
-  return res.json({ server: "server is running" });
-});
+// router.get("/", (req, res) => {
+//   return res.json({ server: "server is running" });
+// });
 
-app.get("/bot-verify", (req, res) => {
+router.get("/", (req, res) => {
   return bot._verify(req, res);
 });
 
