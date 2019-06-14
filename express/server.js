@@ -1,11 +1,22 @@
-"use strict";
 const express = require("express");
 const serverless = require("serverless-http");
-const app = express();
 const bodyParser = require("body-parser");
 const Bot = require("messenger-bot");
+const logger = require("./middlewares/logger");
 
+// INIT APP
+const app = express();
 const router = express.Router();
+
+// Init middleware
+app.use(logger);
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
+
 //  configuring BOT
 let bot = new Bot({
   token:
@@ -13,37 +24,12 @@ let bot = new Bot({
   verify: "MY_TOKEN",
   app_secret: "APP_SECRET"
 });
-bot.on("error", err => {
-  console.log(err.message);
-});
 
-bot.on("message", (payload, reply) => {
-  let text = payload.message.text;
-
-  bot.getProfile(payload.sender.id, (err, profile) => {
-    if (err) throw err;
-
-    reply({ text }, err => {
-      if (err) throw JSON.stringify(err);
-
-      console.log(
-        `Echoed back to ${profile.first_name} ${profile.last_name}: ${text}`
-      );
-    });
-  });
-});
-
-app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
-);
-router.get("/status", (req, res) => {
+app.get("/status", (req, res) => {
   return res.json({ server: "server is running" });
 });
 
-app.get("/bot-verify", (req, res) => {
+app.get("/", (req, res) => {
   return bot._verify(req, res);
 });
 
