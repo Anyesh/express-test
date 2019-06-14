@@ -43,7 +43,7 @@ router.get("/", (req, res) => {
   return res.json({ server: "server is running" });
 });
 
-router.get("/bot-verify", (req, res) => {
+app.get("/bot-verify", (req, res) => {
   return bot._verify(req, res);
 });
 
