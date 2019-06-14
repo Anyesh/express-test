@@ -17,8 +17,6 @@ app.use(
   })
 );
 
-app.use("/.netlify/functions/server", router); // path must route to lambda
-
 //  configuring BOT
 let bot = new Bot({
   token:
@@ -31,14 +29,16 @@ let bot = new Bot({
 //   return res.json({ server: "server is running" });
 // });
 
-app.get("/", (req, res) => {
+router.get("/", (req, res) => {
   return bot._verify(req, res);
 });
 
-app.post("/", (req, res) => {
+router.post("/", (req, res) => {
   bot._handleMessage(req.body);
   res.end(JSON.stringify({ status: "ok" }));
 });
+
+app.use("/.netlify/functions/server", router); // path must route to lambda
 
 module.exports = app;
 module.exports.handler = serverless(app);
