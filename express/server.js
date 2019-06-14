@@ -33,12 +33,17 @@ bot.on("message", (payload, reply) => {
   });
 });
 
+bot.on("postback", (payload, reply, actions) => {
+  reply({ text: "hey!" }, (err, info) => {});
+});
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
     extended: true
   })
 );
+
 router.get("/status", (req, res) => {
   return res.json({ server: "server is running" });
 });
