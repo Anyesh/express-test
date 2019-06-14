@@ -2,14 +2,14 @@ const express = require("express");
 const serverless = require("serverless-http");
 const bodyParser = require("body-parser");
 const Bot = require("messenger-bot");
-const logger = require("./middlewares/logger");
+// const logger = require("./middlewares/logger");
 
 // INIT APP
 const app = express();
 const router = express.Router();
 
 // Init middleware
-app.use(logger);
+// app.use(logger);
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
