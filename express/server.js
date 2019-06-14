@@ -25,7 +25,7 @@ let bot = new Bot({
   app_secret: "APP_SECRET"
 });
 
-app.get("/status", (req, res) => {
+router.get("/status", (req, res) => {
   return res.json({ server: "server is running" });
 });
 
