@@ -27,15 +27,15 @@ let bot = new Bot({
   app_secret: "APP_SECRET"
 });
 
-router.get("/", (req, res) => {
-  return res.json({ server: "server is running" });
-});
+// router.get("/", (req, res) => {
+//   return res.json({ server: "server is running" });
+// });
 
-app.get("/messenger", (req, res) => {
+app.get("/", (req, res) => {
   return bot._verify(req, res);
 });
 
-app.post("/messenger", (req, res) => {
+app.post("/", (req, res) => {
   bot._handleMessage(req.body);
   res.end(JSON.stringify({ status: "ok" }));
 });
