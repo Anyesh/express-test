@@ -5,6 +5,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const Bot = require("messenger-bot");
 
+const router = express.Router();
 //  configuring BOT
 let bot = new Bot({
   token:
@@ -38,18 +39,13 @@ app.use(
     extended: true
   })
 );
-// router.get("/", (req, res) => {
-//   return res.json({ server: "server is running" });
-// });
-
-app.get("/", (req, res) => {
-  return bot._verify(req, res);
+router.get("/status", (req, res) => {
+  return res.json({ server: "server is running" });
 });
 
-// router.post("/", (req, res) => {
-//   bot._handleMessage(req.body);
-//   res.end(JSON.stringify({ status: "ok" }));
-// });
+app.get("/bot-verify", (req, res) => {
+  return bot._verify(req, res);
+});
 
 app.use("/.netlify/functions/server", router); // path must route to lambda
 
