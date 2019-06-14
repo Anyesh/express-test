@@ -43,14 +43,14 @@ app.get("/", (req, res) => {
   return res.json({ server: "server is running" });
 });
 
-app.get("/bot-verify", (req, res) => {
-  return bot._verify(req, res);
-});
+// app.get("/bot-verify", (req, res) => {
+//   return bot._verify(req, res);
+// });
 
-app.post("/", (req, res) => {
-  bot._handleMessage(req.body);
-  res.end(JSON.stringify({ status: "ok" }));
-});
+// app.post("/", (req, res) => {
+//   bot._handleMessage(req.body);
+//   res.end(JSON.stringify({ status: "ok" }));
+// });
 
 app.use("/.netlify/functions/server", router); // path must route to lambda
 
