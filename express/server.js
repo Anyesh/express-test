@@ -2,20 +2,22 @@ const express = require("express");
 const serverless = require("serverless-http");
 const bodyParser = require("body-parser");
 const Bot = require("messenger-bot");
-const logger = require("./middleware/logger");
+// const logger = require("./middleware/logger");
 
 // INIT APP
 const app = express();
 const router = express.Router();
 
 // Init middleware
-app.use(logger);
+// app.use(logger);
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
     extended: true
   })
 );
+
+app.use("/.netlify/functions/server", router); // path must route to lambda
 
 //  configuring BOT
 let bot = new Bot({
@@ -25,7 +27,7 @@ let bot = new Bot({
   app_secret: "APP_SECRET"
 });
 
-app.get("/", (req, res) => {
+router.get("/", (req, res) => {
   return res.json({ server: "server is running" });
 });
 
@@ -37,8 +39,6 @@ app.post("/messenger", (req, res) => {
   bot._handleMessage(req.body);
   res.end(JSON.stringify({ status: "ok" }));
 });
-
-app.use("/.netlify/functions/server", router); // path must route to lambda
 
 module.exports = app;
 module.exports.handler = serverless(app);
