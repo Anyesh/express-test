@@ -33,23 +33,23 @@ bot.on("message", (payload, reply) => {
   });
 });
 
-bot.on("postback", (payload, reply, actions) => {
-  reply({ text: "hey!" }, (err, info) => {});
-});
-
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
     extended: true
   })
 );
-
 router.get("/status", (req, res) => {
   return res.json({ server: "server is running" });
 });
 
-router.get("/bot-verify", (req, res) => {
+app.get("/bot-verify", (req, res) => {
   return bot._verify(req, res);
+});
+
+app.post("/", (req, res) => {
+  bot._handleMessage(req.body);
+  res.end(JSON.stringify({ status: "ok" }));
 });
 
 app.use("/.netlify/functions/server", router); // path must route to lambda
