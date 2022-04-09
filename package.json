@@ -23,7 +23,7 @@
   "homepage": "https://github.com/neverendingqs/netlify-express#readme",
   "dependencies": {
     "messenger-bot": "^2.5.0",
-    "moment": "^2.24.0"
+    "moment": "^2.29.2"
   },
   "devDependencies": {
     "body-parser": "^1.18.3",
